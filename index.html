@@ -1,0 +1,247 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: grid;
+            grid-template-rows: 7vh 55vh 38vh;
+            grid-template-columns: 14% 86%;
+            grid-template-areas:
+                "nav nav"
+                "side main"
+                "side display";
+        }
+
+        #nav-bar {
+            grid-area: nav;
+        }
+
+        #side-bar {
+            grid-area: side;
+        }
+
+        #main {
+            grid-area: main;
+        }
+
+        #display {
+            grid-area: display;
+        }
+
+        .db-li::before {
+            border-right: 4px solid white;
+            border-top: 4px solid white;
+            border-bottom: 4px solid white;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: white;
+            background-color: #e84949;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition-duration: 200ms;
+            transition-timing-function: linear;
+            transition-property: all;
+        }
+
+        .db-li:hover::before {
+            transform: scaleX(1);
+        }
+
+        .db-li:hover p {
+            color: white;
+            transform-origin: left;
+            transition-duration: 200ms;
+            transition-property: all;
+            transition-timing-function: linear;
+            z-index: 20;
+        }
+
+        .db-li:hover i {
+            color: white;
+            transform-origin: left;
+            transition-duration: 200ms;
+            transition-property: all;
+            transition-timing-function: linear;
+            z-index: 20;
+        }
+        .web-cam { 
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            padding: 2px;
+            /* -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%); */
+        }
+    </style>
+</head>
+
+<body>
+    <!--navbar-->
+    <div id="nav-bar" class="bg-red-500 relative flex items-center">
+        <img src="images/logo.png" alt="" class="h-[100%] w-[14%]">
+    </div>
+    <!--sidebar-->
+    <div id="side-bar" class="bg-white">
+        <ul class="flex flex-col gap-y-3">
+            <li class="flex flex-row font-pop font-bold text-xl mt-16 py-3 db-li relative">
+                <i class='bx bxs-dashboard ml-14 mr-6'></i>
+                <p>Dashboard</p>
+            </li>
+            <li class="flex flex-row font-pop font-bold text-xl py-3 db-li relative">
+                <i class='bx bxs-user-circle ml-14 mr-6'></i>
+                <p>User</p>
+            </li>
+            <li class="flex flex-row font-pop font-bold text-xl py-3 db-li relative">
+                <i class='bx bxs-envelope ml-14 mr-6'></i>
+                <p>Queries</p>
+            </li>
+            <li class="flex flex-row font-pop font-bold text-xl mt-20 py-3 db-li relative">
+                <i class='bx bx-log-out ml-14 mr-6'></i>
+                <p>Logout</p>
+            </li>
+        </ul>
+    </div>
+    <!--main-->
+    <div id="main" class="bg-gray-300 p-10 flex items-center rounded-tl-full">
+        <div class="rounded-lg border-white relative h-[49.5vh] w-[99.7vw] flex items-center justify-between px-3">
+            <div class="flex bg-[#e84949] flex-col justify-center gap-y-3 rounded-md rounded-tl-full border-white border-[2px] h-[65%] p-5 self-end mb-2">
+                <i class='bx bxs-camera text-white text-xl' id="camera-access"></i>
+                <i class='bx bxs-toggle-right text-white text-xl'></i>
+                <i class='bx bx-toggle-right text-white text-xl'></i>
+            </div>
+
+            <!--Video Section-->
+            <video class="rounded-lg border-white border-[1px] web-cam self-end mb-8" id="vid"></video>
+
+
+            <!--MANUAL ATTENDANCE SECTION-->
+            <div class="bg-[#e84949] rounded-2xl w-[46%] h-[95%] border-white border-[1px] flex items-center justify-center mr-3 rounded-tl-full">
+                <div class="w-[95%] h-[92%] bg-white rounded-2xl p-6 space-y-4 shadow-black shadow-2xl">
+
+                    <!-- Email input -->
+                    <div class="relative mb-6" data-te-input-wrapper-init>
+                        <input type="text"
+                            class="peer block min-h-[auto] w-full rounded border border-neutral-500 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-600 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-neutral-900 dark:text-neutral-200 dark:placeholder:text-neutral-400 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                            id="exampleFormControlInput2" placeholder="Student Id" />
+                        <label for="exampleFormControlInput22"
+                            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-black-400  peer-focus:bg-white peer-focus:px-2 peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-500 dark:peer-focus:text-primary">
+                            Confirm Student Id
+                        </label>
+
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="relative mb-6" data-te-input-wrapper-init>
+                        <input type="text"
+                            class="peer block min-h-[auto] w-full rounded border border-neutral-500 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-neutral-900 dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                            id="exampleFormControlInput22" placeholder="Confirm Student Id" />
+                        <label for="exampleFormControlInput22"
+                            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-black transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-black-400  peer-focus:bg-white peer-focus:px-2 peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-500 dark:peer-focus:text-primary">Confirm
+                            Student Id
+                        </label>
+                    </div>
+
+
+                    <!-- Login button -->
+                    <div class="text-center lg:text-left">
+                        <button type="button"
+                            class="inline-block rounded bg-blue-600 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-1000 ease-in-out hover:bg-blue-800 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                            data-te-ripple-init data-te-ripple-color="light">Submit
+                        </button>
+                        <!-- Register link -->
+                        <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
+                            Register new student?
+                            <a href="#!"
+                                class="text-red-600 transition duration-300 ease-in-out hover:text-red-800 focus:text-danger-600 active:text-danger-700">Register</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--display-->
+    <div id="display" class="bg-gray-300 flex justify-center items-center">
+        <div
+            class="rounded-lg border-white relative h-[99%] w-[95%] flex items-center justify-evenly mb-5">
+            <div
+                class="bg-[#e84949] flex flex-col gap-y-3 rounded-md border-white border-[1px] h-[95%] p-5 ml-1 items-center justify-center">
+                <p class="text-white font-bold text-xl font-pop">D</p>
+                <p class="text-white font-bold text-xl font-pop">O</p>
+                <p class="text-white font-bold text-xl font-pop">M</p>
+                <p class="text-white font-bold text-xl font-pop">A</p>
+                <p class="text-white font-bold text-xl font-pop">I</p>
+                <p class="text-white font-bold text-xl font-pop">N</p>
+                <p class="text-white font-bold text-xl font-pop">S</p>
+            </div>
+            <!--SCROLL SECTION FOR DOMAINS-->
+            <div class="rounded-lg  flex items-center justify-evenly w-[95%] h-[95%]">
+                <div class="bg-[#e84949] rounded-md w-[48%] h-[100%] border-[1px] flex flex-col gap-y-5 shadow-black shadow-lg">
+                    <h1 class="text-white font-pop text-2xl font-extrabold text-center mt-2">APP DEVELOPMENT</h1>
+                    <div class="h-2 w-10 bg-white mx-auto"></div>
+                    <!--IMPLEMENT FOR SCROLL FOR OTHER MEMBERS DETAILS-->
+                    <div class="flex items-center justify-between px-14">
+                        <img src="images/21052130.jpg" class="h-14 w-14 rounded-full" alt="">
+                        <p class="text-white font-pop text-xl">Adarsh Kumar</p>
+                        <p class="text-white font-pop text-lg">16-08-2023</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                            style="fill: white;transform: msFilter">
+                            <path
+                                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z">
+                            </path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;transform: msFilter"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11H7v-2h10v2z"></path></svg>
+                    </div>
+
+
+                    <div class="flex items-center justify-between px-14">
+                        <img src="images/21052130.jpg" class="h-14 w-14 rounded-full" alt="">
+                        <p class="text-white font-pop text-xl">Adarsh Kumar</p>
+                        <p class="text-white font-pop text-lg">16-08-2023</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                            style="fill: white;transform: msFilter">
+                            <path
+                                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z">
+                            </path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;transform: msFilter"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11H7v-2h10v2z"></path></svg>
+                    </div>
+
+                    <div class="flex items-center justify-between px-14">
+                        <img src="images/21052130.jpg" class="h-14 w-14 rounded-full" alt="">
+                        <p class="text-white font-pop text-xl">Adarsh Kumar</p>
+                        <p class="text-white font-pop text-lg">16-08-2023</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                            style="fill: white;transform: msFilter">
+                            <path
+                                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z">
+                            </path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;transform: msFilter"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11H7v-2h10v2z"></path></svg>
+                    </div>
+
+
+
+                    <!--END OF MEMBERS SECTION-->
+                </div>
+                <div class="bg-[#e84949] rounded-md w-[48%] h-[100%] border-[1px] flex flex-col gap-y-5 shadow-black shadow-lg"></div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
